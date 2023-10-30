@@ -1074,7 +1074,10 @@ class SX126x(BaseLoRa) :
 
     def getIrqStatus(self) -> int :
         buf = self._readBytes(0x12, 3)
-        return (buf[1] << 8) | buf[2]
+        try:
+            return (buf[1] << 8) | buf[2]
+        except:
+            return 0
 
     def clearIrqStatus(self, clearIrqParam: int) :
         buf = (
